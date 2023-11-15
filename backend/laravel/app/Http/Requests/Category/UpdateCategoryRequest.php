@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateMesaRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -19,12 +19,11 @@ class UpdateMesaRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'nombre' => 'sometimes|string|max:30',
-            'categoria' => 'sometimes|string|max:30',
-            'capacidad' => 'sometimes|integer|max:30',
+            'name_category' => 'sometimes',
+            'photo' => 'sometimes',
         ];
     }
 }

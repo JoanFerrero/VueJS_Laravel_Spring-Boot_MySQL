@@ -4,22 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
+use App\Models\Mesa;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Mesa extends Model
+class Category extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'name_mesa',
-        'capacity',
-        'is_active',
+        'name_category',
         'photo',
     ];
 
-    public function categories(): BelongsToMany
+    public function mesas(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class, 'mesas_categories', 'mesa_id', 'category_id');
+        return $this->belongsToMany(Mesa::class, 'mesas_categories', 'category_id', 'mesa_id');
     }
 }

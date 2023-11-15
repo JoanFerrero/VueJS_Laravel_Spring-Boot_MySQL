@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Resources\MesaResource;
-use App\Http\Requests\StoreMesaRequest;
-use App\Http\Requests\UpdateMesaRequest;
+use App\Http\Requests\Mesa\StoreMesaRequest;
+use App\Http\Requests\Mesa\UpdateMesaRequest;
+use App\Http\Requests\Mesa\CategoryResource;
 use App\Models\Mesa;
+use App\Models\Category;
+use Illuminate\Support\Facades\Log;
 
 class MesaController extends Controller
 {
@@ -32,7 +35,21 @@ class MesaController extends Controller
      */
     public function store(StoreMesaRequest $request)
     {
-        return MesaResource::make(Mesa::create($request->validated()));
+        $data = $request->except(['categories']);
+        $categories = Category::where('name_category', $request->categories)->get();
+        if($categories) {
+            $categories_id = [];
+            foreach ($categories as $c) {
+                array_push($categories_id, $c->id);
+            }
+            $mesa = Mesa::create($data);
+            $mesa->categories()->sync($categories_id);
+            return MesaResource::make($mesa);
+        } else {
+            return response()->json([
+                "Status" => "Not found"
+            ], 404);
+        }
     }
 
     /**
@@ -56,16 +73,35 @@ class MesaController extends Controller
      */
     public function update(UpdateMesaRequest $request, $id)
     {
-        if (Mesa::where('id', $id)->exists()) {
-            $mesa = Mesa::find($id);
+        $data = $request->except(['categories']);
+        $categories_name = [];
+        if ($request->categories !== null) {
+            $categories_name = $request->categories;
 
-            $mesa->update($request->validated());
-            return MesaResource::make($mesa);
-          } else {
+            $categories = Category::where('name_category', $categories_name)->get();
+            $categories_id = [];
+            foreach ($categories as $c) {
+                array_push($categories_id, $c->id);
+            }
+        }
+
+        $update = Mesa::where('id', $id)->update($data);
+
+        if ($update == 1) {
+            if (count($categories_id) > 0) {
+                $mesa = Mesa::where('id', $id)->firstOrFail();
+                $mesa->categories()->detach();
+                $mesa->categories()->sync($categories_id);
+            }
+
             return response()->json([
-              "message" => "Mesa not found"
+                "Message" => "Updated correctly"
+            ]);
+        } else {
+            return response()->json([
+                "Status" => "Not found"
             ], 404);
-          } 
+        };
     }
 
     /**
@@ -73,9 +109,8 @@ class MesaController extends Controller
      */
     public function destroy(string $id)
     {
-        if(Mesa::where('id', $id)->exists()) {
-            $mesa = Mesa::find($id);
-            $mesa->delete();
+        $delete = Mesa::where('id', $id)->delete();
+        if($delete == 1) {
             return response()->json([
               "message" => "Mesa deleted"
             ], 202);

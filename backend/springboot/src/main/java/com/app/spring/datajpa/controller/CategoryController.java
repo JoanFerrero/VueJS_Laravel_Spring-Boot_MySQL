@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.spring.datajpa.model.Mesa;
-import com.app.spring.datajpa.repository.MesaRepository;
+import com.app.spring.datajpa.model.Category;
+import com.app.spring.datajpa.repository.CategoryRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
-public class MesaController {
+public class CategoryController {
 
 	@Autowired
-	MesaRepository mesaRepository;
+	CategoryRepository categoryRepository;
 
-	@GetMapping("/mesa")
-	public ResponseEntity<List<Mesa>> getAllMesas() {
+	@GetMapping("/category")
+	public ResponseEntity<List<Category>> getAllMesas() {
 		try {
-			List<Mesa> mesas = new ArrayList<Mesa>();
-			mesaRepository.findAll().forEach(mesas::add);
-			return new ResponseEntity<>(mesas, HttpStatus.OK);
+			List<Category> categories = new ArrayList<Category>();
+			categoryRepository.findAll().forEach(categories::add);
+			return new ResponseEntity<>(categories, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	@GetMapping("/mesa/{id}")
-	public ResponseEntity<Mesa> getMesaById(@PathVariable("id") long id) {
-		Optional<Mesa> mesaData = mesaRepository.findById(id);
+	@GetMapping("/category/{id}")
+	public ResponseEntity<Category> getMesaById(@PathVariable("id") long id) {
+		Optional<Category> categoryData = categoryRepository.findById(id);
 
-		if (mesaData.isPresent()) {
-			return new ResponseEntity<>(mesaData.get(), HttpStatus.OK);
+		if (categoryData.isPresent()) {
+			return new ResponseEntity<>(categoryData.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

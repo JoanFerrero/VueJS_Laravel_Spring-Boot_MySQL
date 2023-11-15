@@ -3,61 +3,73 @@ package com.app.spring.datajpa.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "mesa")
+@Table(name = "mesas")
 public class Mesa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@Column(name = "nombre")
-	private String nombre;
+	@Column(name = "name_mesa")
+	private String name_mesa;
 
-	@Column(name = "categoria")
-	private String categoria;
+	@Column(name = "capacity")
+	private Integer capacity;
 
-	@Column(name = "capacidad")
-	private Integer capacidad;
+	@Column(name = "is_active")
+	private Integer is_active;
+
+	@Column(name = "photo")
+	private String photo;
 
 	public Mesa() {
 
 	}
 
-	public Mesa(String nombre, String categoria, Integer capacidad) {
-		this.nombre = nombre;
-		this.categoria = categoria;
-		this.capacidad = capacidad;
+	public Mesa(String name_mesa, Integer capacity, Integer is_active, String photo) {
+		this.name_mesa = name_mesa;
+		this.capacity = capacity;
+		this.is_active = is_active;
+		this.photo = photo;
 	}
 
 	public long getId() {
 		return id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getName_mesa() {
+		return name_mesa;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setName_mesa(String name_mesa) {
+		this.name_mesa = name_mesa;
 	}
 
-	public String getCategoria() {
-		return categoria;
+	public Integer getCapacity() {
+		return capacity;
 	}
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void setCapacity(Integer capacity) {
+		this.capacity = capacity;
 	}
 
-	public Integer getCapacidad() {
-		return capacidad;
+	public Integer getIs_active() {
+		return is_active;
 	}
 
-	public void setCapacidad(Integer capacidad) {
-		this.capacidad = capacidad;
+	public void setIs_active(Integer is_active) {
+		this.is_active = is_active;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 	@Override
 	public String toString() {
-		return "Mesa [id=" + id + ", nombre=" + nombre + ", categoria=" + categoria + ", capacidad=" + capacidad + "]";
+		return "Mesas [id=" + id + ", name_mesa=" + name_mesa + ", capacity=" + capacity + ", is_active=" + is_active + ", photo=" + photo + "]";
 	}
 }
