@@ -9,12 +9,12 @@ export default {
         return Api(secrets.URL_LARAVEL).get('mesa/' + id);
     },
     DeleteMesa(id) {
-        return Api(secrets.URL_LARAVEL).delete(`mesa/${id}`);
+        return Api(secrets.URL_LARAVEL).delete(`mesa/${id}`)
     },
-    CreateMesadata(data) {
-        return Api(secrets.URL_LARAVEL).post('mesa', data);
+    UpdateOneMesa(mesa) {
+        return Api(secrets.URL_LARAVEL).put(`mesa/${mesa.id}`, mesa)
     },
-    UpdateMesa(data) {
-        return Api(secrets.URL_LARAVEL).put(`mesa/${data.id}`, data);
+    CreateOneMesa(mesa) {
+        return Api(secrets.URL_LARAVEL).post(`mesa`, mesa)
     },
 }

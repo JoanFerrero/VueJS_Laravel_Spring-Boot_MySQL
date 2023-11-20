@@ -1,15 +1,27 @@
 import Constant from '../../../Constant';
-import MesaService from '../../../services/springboot/MesaService';
+import MesaService from "../../../services/springboot/MesaService"
 
 export const mesa = {
     namespaced: true,
+    mutations: {
+        [Constant.INITIALIZE_MESA]: (state, payload) => {
+            if (payload) {
+                state.mesa = payload;
+            }
+        },
+        [Constant.INITIALIZE_ONE_STATE_MESA]: (state, payload) => {
+            if (payload) {
+                state.OneMesa = payload;
+            }
+        },
+    },//mutations
     actions: {
         [Constant.INITIALIZE_MESA]: async (store) => {
             try {
                 const response = await MesaService.GetMesas();
                 store.commit(Constant.INITIALIZE_MESA, response.data);
             } catch (error) {
-                console.error(error);
+                console.error(error)
             }
         },
         [Constant.INITIALIZE_ONE_STATE_MESA]: async (store, payload) => {
@@ -27,23 +39,13 @@ export const mesa = {
                 console.error(error)
             }
         },
-
     },//actions
-    mutations: {
-        [Constant.INITIALIZE_MESA]: (state, payload) => {
-            if (payload) {
-                state.mesa = payload;
-            }
-        },
-        [Constant.INITIALIZE_MESA]: (state, payload) => {
-            if (payload) {
-                state.OneMesa = payload;
-            }
-        }
-    },//mutations
     getters: {
-        GetMesas(state) {
-            return state.mesas;
-        }
+        getMesas(state) {
+            return state.mesa;
+        },
+        getOneMesa(state) {
+            return state.OneMesa;
+        },
     }//getters
 }//export

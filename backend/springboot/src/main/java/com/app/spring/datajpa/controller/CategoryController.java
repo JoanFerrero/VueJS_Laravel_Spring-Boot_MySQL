@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.spring.datajpa.model.Category;
 import com.app.spring.datajpa.repository.CategoryRepository;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api")
 public class CategoryController {

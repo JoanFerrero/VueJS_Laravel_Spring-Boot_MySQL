@@ -28,9 +28,7 @@ export const categoryDashboard = {
         [Constant.DELETE_CATEGORY]: async (store, payload) => {
             try {
                 const response = await CategoryServiceDashboard.DeleteCategory(payload);
-                if (response.status === 200) {
-                    store.commit(Constant.DELETE_CATEGORY, payload);
-                }
+                store.commit(Constant.DELETE_CATEGORY, payload);
             } catch (error) {
                 console.error(error);
             }
@@ -69,7 +67,9 @@ export const categoryDashboard = {
             }
         },//INITIALIZE_ONE_CATEGORY
         [Constant.DELETE_CATEGORY]: (state, payload) => {
-            state.categories = state.categories.filter(item => item.id !== payload);
+            if (payload) {
+                state.categories = state.categories.filter((itemcategory) => itemcategory.id !== payload);
+            }
         },//DELETE_CATEGORY
         [Constant.ADD_CATEGORY]: (state, payload) => {
             if (payload) {

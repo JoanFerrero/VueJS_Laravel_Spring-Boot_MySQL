@@ -28,11 +28,11 @@ public class Category {
 		return id;
 	}
 
-	public String getName_mesa() {
+	public String getName_category() {
 		return name_category;
 	}
 
-	public void setName_mesa(String name_category) {
+	public void setName_category(String name_category) {
 		this.name_category = name_category;
 	}
 
@@ -46,6 +46,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Mesas [id=" + id + ", name_category=" + name_category + ", photo=" + photo + "]";
+		//return "Category [id=" + id + ", name_category=" + name_category + ", photo=" + photo + "]";
+		return "Category [id=" + id + ", name_category=" + name_category + ",  photo=" + photo + "]";
 	}
 }

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h2>Home</h2>
+    <div v-for="category in state.categories">
+        <h2>{{category.name_category}}</h2>
     </div>
 </template>
 
@@ -19,7 +19,6 @@ export default {
         const state = reactive({
             categories: computed(() => store.getters['category/GetCategories'])
         });
-        console.log(state)
 
         return { state }
     }
