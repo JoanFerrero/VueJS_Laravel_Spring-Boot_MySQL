@@ -4,6 +4,7 @@ const routes = [
   { path:"", redirect:{ name:"home" } },
   { path:"/home", name:"home", component: () => import('../views/Home.vue') },
   { path:"/reservation", name:"reservation", component: () => import('../views/Reservation.vue') },
+  { path: "/reservation/:filters", name: "reservationFilters", component: () => import('../views/Reservation.vue')},
   { path:"/dashboard", name:"dashboard", component: () => import('../views/dashboard/mesa/MesaList.vue') },
   { path:"/dashboard/mesa", name:"mesalist", component: () => import('../views/dashboard/mesa/MesaList.vue') },
   { path:"/dashboard/mesa/create", name:"mesacreate", component: () => import('../views/dashboard/mesa/MesaCreate.vue') },

@@ -16,7 +16,6 @@ export default {
         const router = useRouter();
         
         const create_emit = (mesa) => {
-            console.log(mesa)
             store.dispatch(`mesaDashboard/${Constant.CREATE_ONE_MESA}`, mesa);
             toaster.success("Mesa created");
             redirects.return();

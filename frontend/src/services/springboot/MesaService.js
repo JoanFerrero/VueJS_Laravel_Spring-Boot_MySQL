@@ -2,9 +2,21 @@ import Api from "../api";
 import secrets from "../../secrets";
 
 export default {
+    FormatFilters(params) {
+        let params_ = [];
+        Object.entries(params).forEach(item => {
+            if (item[0] === 'categories' && item[1].length > 0) {
+                const categories = item[1].map(item => `categories=${item}`).join('&');
+                params_.push(categories)
+            } else if (item[1] != null) {
+                params_.push(`${item[0]}=${item[1]}`);
+            }
+        });
+        return params_.join('&')
+    },
 
-    GetMesas() {
-        return Api(secrets.URL_SPRING).get('mesa');
+    GetMesas(params) {
+        return Api(secrets.URL_SPRING).get(`mesa?${this.FormatFilters(params)}`);
     },
     GetOneMesa(id) {
         return Api(secrets.URL_SPRING).get('mesa/' + id);

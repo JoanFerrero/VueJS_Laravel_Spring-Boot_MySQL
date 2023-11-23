@@ -1,24 +1,26 @@
 <template>
-    <div class="mt-3">
-        <ul class="list list-inline">
-            <li class="d-flex justify-content-between" v-for="category in state.categories">
-                <div class="d-flex flex-row align-items-center"><i class="fa fa-check-circle checkicon"></i>
-                    <div class="ml-2 d-flex flex-column mr-2">
-                        <h6 class="mb-0">Nombre: {{category.name_category}}</h6>
-                    </div>
-                </div>
-                <div class="d-flex flex-row align-items-center">
-                    <div class="d-flex flex-column mr-2">
-                        <div class="profile-image">
-                          <button class="btn btn-primary" @click="updateCategory(category.id)">Editar</button>
-                          <button class="btn btn-danger" @click="deleteCategory(category.id)">Borrar</button>
-                        </div>
-                    </div>
-                    <i class="fa fa-ellipsis-h"></i>
-                </div>
-            </li>
-        </ul>
-    </div>
+  <table class="table table-warning">
+    <thead>
+      <tr>
+        <th scope="col">#ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Borrar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="category in state.categories">
+        <th scope="row">{{category.id}}</th>
+        <td>{{category.name_category}}</td>
+        <td>
+          <button class="btn btn-primary" @click="updateCategory(category.id)">Editar</button>
+        </td>
+        <td>
+          <button class="btn btn-danger" @click="deleteCategory(category.id)">Borrar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <script>

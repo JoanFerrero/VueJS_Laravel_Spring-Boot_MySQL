@@ -1,28 +1,30 @@
 <template>
-    <div class="mt-3">
-        <ul class="list list-inline">
-            <li class="d-flex justify-content-between" v-for="mesa in state.mesas">
-                <div class="d-flex flex-row align-items-center"><i class="fa fa-check-circle checkicon"></i>
-                    <div class="ml-2 d-flex flex-column mr-2">
-                        <h6 class="mb-0">Nombre: {{mesa.name_mesa}}</h6>
-                        <h6 class="mb-0">Reservada: {{mesa.is_active === 1 ? 'SI' : 'NO'}}</h6>
-                        <div class="d-flex flex-row mt-1 text-black-50 date-time">
-                            <div class="ml-3"><i class="fa fa-clock-o"></i><span class="ml-2">Capacitat: {{mesa.capacity}}</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex flex-row align-items-center">
-                    <div class="d-flex flex-column mr-2">
-                        <div class="profile-image">
-                            <button class="btn btn-primary" @click="updateMesa(mesa.id)">Editar</button>
-                            <button class="btn btn-danger" @click="deleteMesa(mesa.id)">Borrar</button>
-                        </div>
-                    </div>
-                    <i class="fa fa-ellipsis-h"></i>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <table class="table table-warning">
+      <thead>
+        <tr>
+          <th scope="col">#ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Reservado</th>
+          <th scope="col">Capacidad</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Borrar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="mesa in state.mesas">
+          <th scope="row">{{mesa.id}}</th>
+          <td>{{mesa.name_mesa}}</td>
+          <td>{{mesa.is_active === 1 ? 'Activa' : 'No Activa' }}</td>
+          <td>{{mesa.capacity}}</td>
+          <td>
+            <button class="btn btn-primary" @click="updateMesa(mesa.id)">Editar</button>
+          </td>
+          <td>
+            <button class="btn btn-danger" @click="deleteMesa(mesa.id)">Borrar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 </template>
 
 <script>

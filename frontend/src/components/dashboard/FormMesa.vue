@@ -11,10 +11,9 @@
       <input type="number" class="form-control" id="InputCapacity" v-model="state.mesa.capacity">
     </div>
     <div class="mb-3">
-      <label for="categorySelect" class="form-label">Categoria</label>
-      <select id="categorySelect" class="form-select" v-model="state.mesa.categories">
-        <option v-for="category in state.categories">{{category.name_category}}</option>
-      </select>
+      <label for="InputCategory" class="form-label">Category</label><br>
+      <v-select multiple v-model="state.mesa.categories" :options="state.categories"
+          :getOptionLabel="categories => categories.name_category" />
     </div>
     <div class="mb-3">
       <label>Active</label><br>
@@ -25,6 +24,7 @@
       <label class="error" v-if="v$.photo.$invalid">This field is required and an url</label><br>
       <input type="url" v-model="state.mesa.photo" />
     </div>
+    <i class="bi bi-0-circle"></i>
     <button class="btn btn-primary" 
       @click="sendSubmit()" 
       :disabled="v$.name_mesa.$invalid || 
@@ -38,11 +38,12 @@
 </template>
 
 <script>
-import { reactive, getCurrentInstance, computed } from 'vue'
+import { reactive, getCurrentInstance, computed } from 'vue';
 import Constant from '../../Constant';
-import { useStore } from 'vuex'
-import { useVuelidate } from '@vuelidate/core'
-import { required, url, alphaNum, numeric, minValue } from '@vuelidate/validators'
+import { useStore } from 'vuex';
+import { useVuelidate } from '@vuelidate/core';
+import { required, url, alphaNum, numeric, minValue } from '@vuelidate/validators';
+import { createToaster } from "@meforma/vue-toaster";
 export default {
   props: {
       mesa: Object
@@ -61,6 +62,7 @@ export default {
     console.log(props)
     const { emit } = getCurrentInstance();
     const store = useStore();
+    const toaster = createToaster({ position: "top-right" });
 
     store.dispatch(`categoryDashboard/${Constant.INITIALIZE_CATEGORY}`);
 
@@ -71,7 +73,15 @@ export default {
 
     state.mesa.is_active = Boolean(state.mesa.is_active);
     const sendSubmit = () => {
-      emit('data', state.mesa)
+      console.log(state.mesa.categories.length)
+      const cat = state.mesa.categories;
+      const names_cat = cat.map(item => item.name_category);
+      state.mesa.categories = names_cat;
+      if(state.mesa.categories.length > 0) {
+        emit('data', state.mesa)
+      } else {
+        toaster.info('Necessitas seleccionar una categoria')
+      }
     }
 
     const rules = computed(() => ({
@@ -91,6 +101,9 @@ export default {
         is_active: {
             required,
         },
+        categories: {
+          required,
+        }
     }));
 
     const v$ = useVuelidate(rules, state.mesa);
@@ -98,3 +111,8 @@ export default {
   }
 }
 </script>
+
+<style>
+@import '../../../node_modules/vue-select/dist/vue-select.css';
+
+</style>

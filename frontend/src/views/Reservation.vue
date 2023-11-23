@@ -1,30 +1,49 @@
 <template>
-    <div v-for="mesa in state.mesas">
-        <h2>{{mesa.name_mesa}}</h2>
+    <div class="p-5">
+        <div class="row row-cols-3 g-3">
+            <div class="col " v-for="mesa in state.mesas">
+                <CardMesa :key="mesa.id" :mesa="mesa" />
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 import { reactive, computed } from 'vue';
 import { useStore } from 'vuex';
-import Constant from '../Constant';
+import { useRouter, useRoute } from 'vue-router';
+import CardMesa from '../components/client/Card_Mesa.vue';
+import { useMesaFilters } from '../composables/mesas/useMesa.js';
 
 export default {
-    components  : {},
+    components  : { CardMesa },
     setup() {
-        const store = useStore();
+        const route = useRoute();
 
-        store.dispatch(`mesa/${Constant.INITIALIZE_MESA}`)
+        let filters_URL = {
+            categories: [],
+            name_mesa: ""
+        };
+
+        try {
+            if (route.params.filters !== '') {
+                filters_URL = JSON.parse(atob(route.params.filters));
+            }
+        } catch (error) {}
 
         const state = reactive({
-            mesas: computed(() => store.getters["mesa/getMesas"])
-        })
+            mesas: useMesaFilters(filters_URL)
+        });
 
-        return { state }
+        return { state, CardMesa }
     }
 }
 </script>
 
 <style>
-
+.card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+}
 </style>
