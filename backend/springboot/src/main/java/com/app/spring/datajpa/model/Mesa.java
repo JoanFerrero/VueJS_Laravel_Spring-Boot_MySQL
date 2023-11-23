@@ -1,5 +1,9 @@
 package com.app.spring.datajpa.model;
 
+
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -21,6 +25,15 @@ public class Mesa {
 	@Column(name = "photo")
 	private String photo;
 
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {
+		CascadeType.PERSIST,
+		CascadeType.MERGE
+    })
+    @JoinTable(name = "mesas_categories", joinColumns = { @JoinColumn(name = "mesa_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "category_id") })
+    private Set<Category> categories = new HashSet<>();
+
+
 	public Mesa() {
 
 	}
@@ -31,6 +44,10 @@ public class Mesa {
 		this.is_active = is_active;
 		this.photo = photo;
 	}
+
+	public Set<Category> getCategories() {
+        return this.categories;
+    }
 
 	public long getId() {
 		return id;
@@ -70,6 +87,6 @@ public class Mesa {
 
 	@Override
 	public String toString() {
-		return "Mesas [id=" + id + ", name_mesa=" + name_mesa + ", capacity=" + capacity + ", is_active=" + is_active + ", photo=" + photo + "]";
+		return "Mesas [id=" + id + ", name_mesa=" + name_mesa + ", capacity=" + capacity + ", is_active=" + is_active + ", photo=" + photo + ", categories=" + categories + "]";
 	}
 }

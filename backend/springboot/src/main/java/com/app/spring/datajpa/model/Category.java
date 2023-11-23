@@ -1,5 +1,10 @@
 package com.app.spring.datajpa.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +19,14 @@ public class Category {
 
 	@Column(name = "photo")
 	private String photo;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {
+		CascadeType.PERSIST,
+		CascadeType.MERGE
+    }, mappedBy = "categories")
+    @JsonIgnore
+    private Set<Mesa> mesas = new HashSet<>();
+
 
 	public Category() {
 

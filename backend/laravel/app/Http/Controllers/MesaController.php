@@ -36,12 +36,12 @@ class MesaController extends Controller
     public function store(StoreMesaRequest $request)
     {
         $data = $request->except(['categories']);
-        $categories = Category::where('name_category', $request->categories)->get();
-        if($categories) {
-            $categories_id = [];
-            foreach ($categories as $c) {
-                array_push($categories_id, $c->id);
-            }
+        $categories = Category::whereIn('name_category', $request->categories)->get();
+        $categories_id = [];
+        foreach ($categories as $c) {
+            array_push($categories_id, $c->id);
+        }
+        if(count($categories_id) > 0) {
             $mesa = Mesa::create($data);
             $mesa->categories()->sync($categories_id);
             return MesaResource::make($mesa);
@@ -77,12 +77,11 @@ class MesaController extends Controller
         $categories_name = [];
         if ($request->categories !== null) {
             $categories_name = $request->categories;
-
-            $categories = Category::where('name_category', $categories_name)->get();
-            $categories_id = [];
-            foreach ($categories as $c) {
-                array_push($categories_id, $c->id);
-            }
+        }
+        $categories = Category::whereIn('name_category', $categories_name)->get();
+        $categories_id = [];
+        foreach ($categories as $c) {
+            array_push($categories_id, $c->id);
         }
 
         $update = Mesa::where('id', $id)->update($data);
