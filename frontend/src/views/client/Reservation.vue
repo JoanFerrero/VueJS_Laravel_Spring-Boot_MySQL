@@ -12,8 +12,8 @@
 import { reactive, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
-import CardMesa from '../components/client/Card_Mesa.vue';
-import { useMesaFilters } from '../composables/mesas/useMesa.js';
+import CardMesa from '../../components/client/Card_Mesa.vue';
+import { useMesaFilters } from '../../composables/mesas/useMesa.js';
 
 export default {
     components  : { CardMesa },
@@ -42,8 +42,8 @@ export default {
 
 <style>
 .card {
-        margin: 0 auto; /* Added */
-        float: none; /* Added */
-        margin-bottom: 10px; /* Added */
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 10px;
 }
 </style>

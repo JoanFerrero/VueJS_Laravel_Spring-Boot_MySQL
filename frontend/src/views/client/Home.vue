@@ -11,8 +11,8 @@
 <script>
 import { reactive, computed } from 'vue';
 import { useStore } from 'vuex';
-import Constant from '../Constant';
-import CardCategory from '../components/client/Card_Category.vue';
+import Constant from '../../Constant';
+import CardCategory from '../../components/client/Card_Category.vue';
 import { useRouter } from 'vue-router';
 
 export default {
