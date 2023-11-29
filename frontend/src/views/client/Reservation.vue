@@ -22,7 +22,9 @@ export default {
 
         let filters_URL = {
             categories: [],
-            name_mesa: ""
+            name_mesa: "",
+            limit: 5,
+            page: 1
         };
 
         try {
@@ -42,8 +44,8 @@ export default {
 
 <style>
 .card {
-        margin: 0 auto;
-        float: none;
-        margin-bottom: 10px;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
 }
 </style>
