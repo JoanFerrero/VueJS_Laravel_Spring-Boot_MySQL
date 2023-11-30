@@ -117,6 +117,19 @@ public class MesaController {
 		}
 	}
 
+	@GetMapping("/mesa/relation/{id}")
+	public ResponseEntity<List<Mesa>> getMesaRelation(@PathVariable("id") Integer id) {
+		try {
+		List<Mesa> mesas = new ArrayList<Mesa>();
+		mesaRepository.findByIdRelation(id).forEach(mesas::add);
+
+		return new ResponseEntity<>(mesas, HttpStatus.OK);
+		} catch (Exception e) {
+			System.err.println(e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 	@GetMapping("/mesaInfinite")
 	public ResponseEntity<List<Mesa>> getGigMesas(@ModelAttribute MesaQueryParam mesaQueryParam) {
 		try {

@@ -14,6 +14,11 @@ export const mesa = {
                 state.OneMesa = payload;
             }
         },
+        [Constant.INITIALIZE_MESA_RELATION]: (state, payload) => {
+            if (payload) {
+                state.mesasRelation = payload;
+            }
+        },
     },//mutations
     actions: {
         [Constant.INITIALIZE_MESA]: async (store) => {
@@ -39,6 +44,14 @@ export const mesa = {
                 console.error(error)
             }
         },
+        [Constant.INITIALIZE_MESA_RELATION]: async (store, payload) => {
+            try {
+                const response = await MesaService.GetMesasRelation(payload);
+                store.commit(Constant.INITIALIZE_MESA_RELATION, response.data);
+            } catch (error) {
+                console.error(error)
+            }
+        },
     },//actions
     getters: {
         getMesas(state) {
@@ -47,5 +60,8 @@ export const mesa = {
         getOneMesa(state) {
             return state.OneMesa;
         },
+        getMesasRelation(state) {
+            return state.mesasRelation;
+        }
     }//getters
 }//export

@@ -24,5 +24,11 @@ export default {
     GetMesasInfinite(page, limit) {
         return Api(secrets.URL_SPRING).get('mesaInfinite', { params: { page: page, limit: limit } });
     },
+    GetMesasPaginate(params) {
+        return Api(secrets.URL_SPRING).get(`mesaPaginate?${this.FormatFilters(params)}`);
+    },
+    GetMesasRelation(id) {
+        return Api(secrets.URL_SPRING).get('/mesa/relation/' + id);
+    }
 
 }//export

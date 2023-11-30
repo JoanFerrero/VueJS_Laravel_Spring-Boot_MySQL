@@ -59,7 +59,6 @@ export default {
   },
   setup(props) {
     const mesa = props.mesa;
-    console.log(props)
     const { emit } = getCurrentInstance();
     const store = useStore();
     const toaster = createToaster({ position: "top-right" });
