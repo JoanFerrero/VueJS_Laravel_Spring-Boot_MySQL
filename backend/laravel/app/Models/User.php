@@ -18,28 +18,37 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
+        'password',
         'email',
-        'password',
+        'type',
+        'is_active',
+        'photo',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password'
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    public function create($fields)
+    {
+        return parent::create([
+            'username' => $fields['username'],
+            'password' => bcrypt($fields['password']),
+            'email' => $fields['email'],
+            'type' => 'client',
+            'is_active' =>  isset($fields['is_active']) ? $fields['is_active'] : true,
+            'photo' =>  isset($fields['photo']) ? $fields['photo'] : 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg',
+        ]);
+    } //create
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
