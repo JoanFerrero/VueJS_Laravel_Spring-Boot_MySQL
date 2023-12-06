@@ -160,6 +160,9 @@ return [
          * Package Service Providers...
          */
 
+        Illuminate\Auth\AuthServiceProvider::class,
+        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

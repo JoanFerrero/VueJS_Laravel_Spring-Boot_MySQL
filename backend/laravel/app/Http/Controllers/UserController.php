@@ -134,4 +134,39 @@ class UserController extends Controller
             ], 404);
         }
     }
+
+    public function login(LoginUserRequest $request) {
+        $token = auth()->attempt($request->validated());
+        if (!$token) {
+            return response()->json([
+                "error" => "Unauthorized"
+            ], 400);
+        }
+        if (auth()->user()->type != "admin") {
+            return response()->json([
+                "error" => "Unauthorized"
+            ], 400);
+        }
+        return response()->json(['token' => $token, 'user' => UserResource::make(auth()->user())]);
+    }
+
+    public function logout() {
+        try {
+            if (auth()->user() === null) {
+                return response()->json(['error' => 'logout error'], 500);
+            }
+            auth()->logout();
+            return response()->json(["Message" => "Logout correctly"]);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'logout error'], 500);
+        }
+    }
+
+    public function getUserToken() {
+        try {
+            return UserResource::make(auth()->user());
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'get user error'], 401);
+        }
+    }
 }
