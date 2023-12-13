@@ -24,11 +24,11 @@
 </template>
 
 <script>
-import { reactive, getCurrentInstance, computed } from 'vue'
+import { reactive, getCurrentInstance, computed } from 'vue';
 import Constant from '../../Constant';
-import { useStore } from 'vuex'
-import { useVuelidate } from '@vuelidate/core'
-import { required, url, alphaNum, numeric, minValue } from '@vuelidate/validators'
+import { useStore } from 'vuex';
+import { useVuelidate } from '@vuelidate/core';
+import { required, url, alphaNum, numeric, minValue } from '@vuelidate/validators';
 export default {
   props: {
       category: Object
@@ -38,8 +38,8 @@ export default {
   },
   computed: {
       isUpdate() {
-          const path = this.$route.path.split('/');
-          return path[3] == 'update';
+        const path = this.$route.path.split('/');
+        return path[3] == 'update';
       },
   },
   setup(props) {
@@ -48,7 +48,7 @@ export default {
     const store = useStore();
 
     const state = reactive({
-        category: { ...category }
+      category: { ...category }
     });
 
     const sendSubmit = () => {

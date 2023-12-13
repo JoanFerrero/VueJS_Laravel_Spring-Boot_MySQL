@@ -30,6 +30,16 @@
                         <i class="fs-4 bi-table"></i><span class="ms-1 d-none d-sm-inline">Create Category</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/dashboard/category" class="nav-link align-middle px-0">
+                        <i class="fs-4 bi-house"></i><span class="ms-1 d-none d-sm-inline">List User</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dashboard/category/create" class="nav-link px-0 align-middle">
+                        <i class="fs-4 bi-table"></i><span class="ms-1 d-none d-sm-inline">Create User</span>
+                    </a>
+                </li>
             </ul>
             <hr>
             <div class="dropdown pb-4">

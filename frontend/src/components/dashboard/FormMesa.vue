@@ -46,16 +46,16 @@ import { required, url, alphaNum, numeric, minValue } from '@vuelidate/validator
 import { createToaster } from "@meforma/vue-toaster";
 export default {
   props: {
-      mesa: Object
+    mesa: Object
   },
   emits: {
-      data: Object
+    data: Object
   },
   computed: {
-      isUpdate() {
-          const path = this.$route.path.split('/');
-          return path[3] == 'update';
-      },
+    isUpdate() {
+      const path = this.$route.path.split('/');
+      return path[3] == 'update';
+    },
   },
   setup(props) {
     const mesa = props.mesa;
@@ -66,16 +66,16 @@ export default {
     store.dispatch(`categoryDashboard/${Constant.INITIALIZE_CATEGORY}`);
 
     const state = reactive({
-        mesa: { ...mesa },
-        categories: computed(() => store.getters['categoryDashboard/GetCategories'])
+      mesa: { ...mesa },
+      categories: computed(() => store.getters['categoryDashboard/GetCategories'])
     });
 
     state.mesa.is_active = Boolean(state.mesa.is_active);
     const sendSubmit = () => {
-      console.log(state.mesa.categories.length)
       const cat = state.mesa.categories;
       const names_cat = cat.map(item => item.name_category);
       state.mesa.categories = names_cat;
+      
       if(state.mesa.categories.length > 0) {
         emit('data', state.mesa)
       } else {

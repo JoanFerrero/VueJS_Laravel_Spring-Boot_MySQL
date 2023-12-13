@@ -1,5 +1,5 @@
 import Constant from '../../../Constant';
-import MesaService from "../../../services/springboot/MesaService"
+import MesaService from "../../../services/springboot/MesaService";
 
 export const mesa = {
     namespaced: true,

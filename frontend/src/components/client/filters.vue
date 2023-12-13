@@ -42,6 +42,7 @@ export default {
   },
   setup(props) {
     const store = useStore();
+    
     store.dispatch(`category/${Constant.INITIALIZE_CATEGORY}`);
 
     const { emit } = getCurrentInstance();
