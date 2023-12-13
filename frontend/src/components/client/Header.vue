@@ -19,11 +19,14 @@
                             <a class="nav-link mx-2" href="/dashboard">DashBoard</a>
                         </li>
                         
-                        <li class="nav-item">
+                        <li class="nav-item" v-if="!state.isLogged">
                             <a class="nav-link mx-2" href="/register">Register</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" v-if="!state.isLogged">
                             <a class="nav-link mx-2" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item" @click="logout()" v-if="state.isLogged">
+                            <a class="nav-link mx-2">Log Out</a>
                         </li>
                     </ul>
                 </div>
@@ -35,15 +38,30 @@
 
 <script>
 import { RouterView } from 'vue-router';
-import { computed } from 'vue'
-
+import { reactive, computed } from 'vue';
+import { useStore } from 'vuex';
+import Constant from '../../Constant';
 export default {
     components: {},
     computed: {
       isAdmin() {
         const path = this.$route.path.split('/');
         return path[1] == 'dashboard';
+      
       },
-  },
+    },
+    setup() {
+        const store = useStore();
+        const state = reactive({
+            profile: computed(() => store.getters['user/GetProfile']),
+            isAdmin: computed(() => store.getters['user/GetIsAdmin']),
+            isLogged: computed(() => store.getters['user/GetIsAuth']),
+        });
+
+        const logout = () => {
+            store.dispatch(`user/${Constant.LOGOUT}`);
+        }
+        return { state, logout };
+    }
 }
 </script>
