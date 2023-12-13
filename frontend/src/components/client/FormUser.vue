@@ -109,17 +109,7 @@ export default {
 
 </script>
 
-<style>
-      *,
-*:before,
-*:after{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-body{
-    background-color: #080710;
-}
+<style scoped>
 .background{
     width: 430px;
     height: 520px;
@@ -154,7 +144,7 @@ body{
 .formlogin{
     height: 520px;
     width: 400px;
-    background-color: rgba(255,255,255,0.13);
+    background-color: #080710;
     position: absolute;
     transform: translate(-50%,-50%);
     top: 50%;

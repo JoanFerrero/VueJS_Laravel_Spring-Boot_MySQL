@@ -17,7 +17,7 @@ export default {
     Login_Admin(data){
         return Api(secrets.URL_LARAVEL).post('login', data);
     },
-    Logout_admin() {
+    Logout_Admin() {
         return Api(secrets.URL_LARAVEL).post('logout');
     },
 }//export

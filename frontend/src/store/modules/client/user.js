@@ -71,13 +71,13 @@ export const user = {
             try {
                 const response = await UserService.Login(payload);
                 if (response.status === 200) {
-                    store.commit(Constant.LOGIN, response.data);
                     if (response.data.user.type == "admin") {
-                        //const response_admin = await UserService.Login_admin(payload);
+                        const response_admin = await UserService.Login_Admin(payload);
                         if (response_admin.status === 200) {
-                            console.log('admin')
-                            //store.commit(Constant.LOGIN_ADMIN, response_admin.data);
+                            store.commit(Constant.LOGIN_ADMIN, response_admin.data);
                         }
+                    } else {
+                        store.commit(Constant.LOGIN, response.data);
                     }
                 }
             } catch (error) {
@@ -89,7 +89,7 @@ export const user = {
                 const response = await UserService.Logout();
                 let data = { status: response.status };
                 if (store.state.isAdmin) {
-                    const response_admin = await UserService.Logout_admin();
+                    const response_admin = await UserService.Logout_Admin();
                     data.status_admin = response_admin.status;
                 }
                 store.commit(Constant.LOGOUT, data);

@@ -15,7 +15,7 @@
                         <li class="nav-item">
                             <a class="nav-link mx-2" href="/reservation">Reservation</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" v-if="state.isAdminLogin">
                             <a class="nav-link mx-2" href="/dashboard">DashBoard</a>
                         </li>
                         
@@ -54,13 +54,14 @@ export default {
         const store = useStore();
         const state = reactive({
             profile: computed(() => store.getters['user/GetProfile']),
-            isAdmin: computed(() => store.getters['user/GetIsAdmin']),
+            isAdminLogin: computed(() => store.getters['user/GetIsAdmin']),
             isLogged: computed(() => store.getters['user/GetIsAuth']),
         });
 
         const logout = () => {
             store.dispatch(`user/${Constant.LOGOUT}`);
         }
+        
         return { state, logout };
     }
 }
