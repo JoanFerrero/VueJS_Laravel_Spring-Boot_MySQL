@@ -1,5 +1,7 @@
 package com.app.spring.datajpa.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import com.app.spring.datajpa.repository.BlacklistTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.app.spring.datajpa.model.User;
 import com.app.spring.datajpa.model.UserAndToken;
+import com.app.spring.datajpa.model.BlacklistToken;
 import com.app.spring.datajpa.repository.UserRepository;
+import com.app.spring.datajpa.security.jwt.AuthTokenFilter;
 import com.app.spring.datajpa.security.jwt.JwtUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,7 +40,13 @@ public class UserController {
 
     @Autowired
     private JwtUtils jwtUtils;
-    
+
+    @Autowired
+    private AuthTokenFilter authTokenFilter;
+
+    @Autowired
+    private BlacklistTokenRepository BlacklistTokenRepository;
+
     @GetMapping("/profile")
     public ResponseEntity<User> profile() {
 
@@ -89,8 +99,14 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logoutUser() {
+    public ResponseEntity<?> logoutUser(HttpServletRequest request) {
         try {
+            String token = authTokenFilter.parseJwt(request);
+            if (BlacklistTokenRepository.TokenExist(token) == 0) {
+                BlacklistToken blacklistToken = new BlacklistToken();
+                blacklistToken.setToken(token);
+                BlacklistTokenRepository.save(blacklistToken);
+            }
             return new ResponseEntity<>(HttpStatus.OK);
 
         } catch (Exception e) {

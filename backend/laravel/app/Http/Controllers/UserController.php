@@ -169,4 +169,10 @@ class UserController extends Controller
             return response()->json(['error' => 'get user error'], 401);
         }
     }
+
+    public function isAdmin() {
+        return response()->json([
+            "msg" => "You are and admin"
+        ], 200);
+    }
 }
