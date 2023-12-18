@@ -27,6 +27,7 @@ export const user = {
                 toaster.success('Login admin successfuly');
                 localStorage.setItem("token_admin", payload.token);
                 localStorage.setItem("isAdmin", true);
+                localStorage.setItem("isAuth", true);
                 state.user = payload.user;
                 state.isAdmin = true;
                 router.push({ name: 'home' });
@@ -70,14 +71,13 @@ export const user = {
         [Constant.LOGIN]: async (store, payload) => {
             try {
                 const response = await UserService.Login(payload);
+                store.commit(Constant.LOGIN, response.data);
                 if (response.status === 200) {
                     if (response.data.user.type == "admin") {
                         const response_admin = await UserService.Login_Admin(payload);
                         if (response_admin.status === 200) {
                             store.commit(Constant.LOGIN_ADMIN, response_admin.data);
                         }
-                    } else {
-                        store.commit(Constant.LOGIN, response.data);
                     }
                 }
             } catch (error) {

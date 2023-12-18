@@ -2,7 +2,7 @@
     <div v-if="!isAdmin">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Restaurante</a>
+                <a class="navbar-brand" href="/home">Restaurante</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -25,9 +25,15 @@
                         <li class="nav-item" v-if="!state.isLogged">
                             <a class="nav-link mx-2" href="/login">Login</a>
                         </li>
+                        <li class="nav-item" v-if="state.isLogged">
+                            <a class="nav-link mx-2" href="/profile">Profile</a>
+                        </li>
                         <li class="nav-item" @click="logout()" v-if="state.isLogged">
                             <a class="nav-link mx-2">Log Out</a>
                         </li>
+                        <!--<li class="nav-item" @click="logout()">
+                            <a class="nav-link mx-2">Log Out</a>
+                        </li>-->
                     </ul>
                 </div>
             </div>

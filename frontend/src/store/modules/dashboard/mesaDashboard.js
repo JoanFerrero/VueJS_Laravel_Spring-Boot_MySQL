@@ -28,7 +28,7 @@ export const mesaDashboard = {
             }
         },
         [Constant.CREATE_ONE_MESA]: (state, payload) => {
-            state.mesa.push({ ...payload });
+            state.mesa.push(payload);
         },
     },//mutations
     actions: {
@@ -75,8 +75,8 @@ export const mesaDashboard = {
         },
         [Constant.CREATE_ONE_MESA]: async (store, payload) => {
             try {
-                payload.is_active = true;
                 const response = await MesaServiceDashboard.CreateOneMesa(payload);
+                console.log(response.status)
                 if (response.status == 201) {
                     store.commit(Constant.CREATE_ONE_MESA, response.data.data);
                 }

@@ -58,7 +58,6 @@ export default {
     const rules = computed(() => ({
         name_category: {
           required,
-          alphaNum,
         },
         photo: {
           required,

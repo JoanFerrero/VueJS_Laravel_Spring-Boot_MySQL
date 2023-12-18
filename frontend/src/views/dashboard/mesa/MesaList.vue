@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { ref, onMounted, reactive, computed } from 'vue';
+import { reactive, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import Constant from '../../../Constant.js';
@@ -62,7 +62,7 @@ export default {
         const state = reactive({
             mesas: computed(() => store.getters["mesaDashboard/getMesas"])
         })
-        console.log(state)
+
         return { state, updateMesa, deleteMesa }
     }
 }

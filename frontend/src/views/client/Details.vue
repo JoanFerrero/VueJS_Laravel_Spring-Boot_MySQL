@@ -55,7 +55,7 @@ export default {
       setTimeout(() => {
         location.reload();
       }, 100);
-    }
+    };
 
     return { state, showDetails }
   }

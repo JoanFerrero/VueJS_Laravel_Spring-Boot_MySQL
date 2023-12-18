@@ -20,4 +20,7 @@ export default {
     Logout_Admin() {
         return Api(secrets.URL_LARAVEL).post('logout');
     },
+    isAdmin() {
+        return Api(secrets.URL_LARAVEL).get('isAdmin');
+    },//Profile
 }//export
