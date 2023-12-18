@@ -52,10 +52,7 @@ class UserController extends Controller
             ], 400);
         }
 
-        $data = $request->validated();
-
         $user = $this->user->create($request->validated());
-        //return response()->json(["message" => $user], 201);
         return UserResource::make($user);
     }
 
