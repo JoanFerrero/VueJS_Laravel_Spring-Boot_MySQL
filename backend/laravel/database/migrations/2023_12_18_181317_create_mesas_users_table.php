@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->date('fecha_reserva');
+            $table->string('categoria');
             $table->foreignId('mesa_id')->constrained('mesas')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->boolean('accepted');
+            $table->boolean('accepted')->default(false);
             $table->timestamps();
         });
     }

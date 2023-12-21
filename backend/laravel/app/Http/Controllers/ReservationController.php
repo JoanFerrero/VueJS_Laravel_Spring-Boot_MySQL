@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\ReservationResource;
 use App\Models\Reservation;
+use App\Http\Requests\Reservation\UpdateReservationRequest;
 
 class ReservationController extends Controller
 {
@@ -51,9 +52,20 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateReservationRequest $request, string $id)
     {
-        //
+        $data = $request->except(['user_id', 'mesa_id']);
+        $reservation = Reservation::where('id', $id)->firstOrFail();
+        $update = Reservation::where('id', $id)->update($data);
+        if($update == 1) {
+            return response()->json([
+                "Status" => "Update correct"
+            ], 201);
+        } else {
+            return response()->json([
+                "Status" => "Update not correct"
+            ], 400);
+        }
     }
 
     /**
@@ -61,6 +73,15 @@ class ReservationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delete = Reservation::where('id', $id)->delete();
+        if($delete == 1) {
+            return response()->json([
+              "message" => "Reservation deleted"
+            ], 202);
+        } else {
+            return response()->json([
+              "message" => "Reservation not found"
+            ], 404);
+        }
     }
 }

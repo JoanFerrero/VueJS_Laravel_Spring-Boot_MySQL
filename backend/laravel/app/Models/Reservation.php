@@ -18,11 +18,11 @@ class Reservation extends Model
 
     public function user(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'mesas_users', 'user_id', 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     public function mesa(): BelongsToMany
     {
-        return $this->belongsToMany(Mesa::class, 'mesas_users', 'mesa_id', 'mesa_id');
-    } 
+        return $this->belongsTo(Mesa::class);
+    }
 }
