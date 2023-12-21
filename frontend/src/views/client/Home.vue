@@ -28,7 +28,7 @@ import { useMesaInfinite } from '../../composables/mesas/useMesa.js';
 import InfiniteLoading from "v3-infinite-loading";
 
 export default {
-  components  : { InfiniteLoading, carrousel, CardCategory },
+  components: { InfiniteLoading, carrousel, CardCategory },
   setup() {
     const store = useStore();
     const router = useRouter();
@@ -55,12 +55,13 @@ export default {
     }
 
     const addInfinite = (page) => {
-      state.mesasInfinite = useMesaInfinite(page, 2);
+      const mesas = useMesaInfinite(page, 2);
+      state.mesasInfinite = mesas;
     }
 
     const scroll = ($state) => {
       page++;
-      if (page <= 3) {
+      if (page <= 4) {
         addInfinite(page);
       }
     }

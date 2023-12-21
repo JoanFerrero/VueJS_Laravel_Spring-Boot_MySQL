@@ -23,10 +23,12 @@ export const useMesaPaginate = (filters = {}) => {
     return totalPages;
 };
 
-export const useMesaInfinite = (page = 1, limit = 3) => {
+export const useMesaInfinite = (page = 1, limit = 2) => {
     const mesas = ref([])
     MesaService.GetMesasInfinite(page, limit)
         .then(res => mesas.value = res.data)
         .catch(error => console.error(error))
+        
+
     return mesas;
 };

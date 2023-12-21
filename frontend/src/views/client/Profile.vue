@@ -58,21 +58,25 @@
             </div>
         </div>
     </div>
+    <h1>Reservation</h1>
+    <ul class="list-group">
+        <li class="list-group-item" v-for="reservation in state.reservations">{{reservation.categoria}} {{reservation.accepted}} {{reservation.fecha_reserva}}</li>
+    </ul>
 </div>
 </template>
 
 <script>
 import { reactive, computed } from 'vue';
 import { useStore } from 'vuex';
+import { useReservationList } from '../../composables/reservation/useReservation.js';
 export default {
   setup(props) {
     const store = useStore();
     const state = reactive({
         profile: computed(() => store.getters['user/GetProfile']),
+        reservations: useReservationList()
     });
-    console.log(state.profile)
-
-
+console.log(state)
     return {state}
   }
 }

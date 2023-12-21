@@ -12,6 +12,12 @@
         <ul>
           <li v-for="category in state.mesas.categories">{{category.name_category}}</li>
         </ul>
+        <h3 class="my-3">Realizar reserva</h3>
+        <select class="form-select" aria-label="Default select example">
+          <option v-for="category in state.mesas.categories">{{category.name_category}}</option>
+        </select>
+        <br>
+        <button type="button" class="btn btn-secondary btn-lg">Reservar</button>
       </div>
     </div>
     <h3 class="my-4">Mesas Relacionadas</h3>

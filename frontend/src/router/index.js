@@ -82,7 +82,8 @@ const routes = [
   {
     path: "/profile",
     name: "userprofile",
-    component: () => import('../views/client/Profile.vue')
+    component: () => import('../views/client/Profile.vue'),
+    beforeEnter: AuthGuards.AuthGuard, meta: { requiresAuth: true }
   }
 ];
 

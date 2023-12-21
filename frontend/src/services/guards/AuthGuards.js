@@ -8,12 +8,6 @@ export default {
         try {
             if (localStorage.getItem('isAdmin')) {
                 next();
-                // Mirar resposta de la consulta a Laraven
-                //const response = await UserService.isAdmin();
-                //console.log(response)
-                //if (response.status === 200) {
-                //    next();
-                //}
             } else {
                 next('/login');
             }
@@ -24,7 +18,14 @@ export default {
     },
 
     async AuthGuard(to, from, next) {
-        
+        if (localStorage.getItem('isAuth')) {
+            await store.dispatch(`user/${Constant.INITIALIZE_PROFILE}`);
+        }
+        if (store.getters['user/GetIsAuth'] && localStorage.getItem('isAuth')) {
+            next();
+        } else {
+            next('/home');
+        }
     },
 
     async noAuthGuard(to, from, next) {
