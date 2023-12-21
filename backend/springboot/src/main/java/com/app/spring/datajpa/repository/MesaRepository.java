@@ -76,6 +76,6 @@ public interface MesaRepository extends JpaRepository<Mesa, Long> {
         Integer findByCapacityAndCategoriesPaginate(@Param("capacity") Number capacity,
                 @Param("categories") String[] categories, @Param("name_mesa") String name_mesa);
 
-        @Query(value = "SELECT * FROM mesas m WHERE m.id != :id limit 4;", nativeQuery = true)
+        @Query(value = "SELECT * FROM mesas m WHERE m.id != :id limit 2;", nativeQuery = true)
         List<Mesa> findByIdRelation(@Param("id") Integer id);
 }
