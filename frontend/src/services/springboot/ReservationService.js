@@ -5,8 +5,9 @@ export default {
     GetReservation() {
         return Api(secrets.URL_SPRING).get('reservation');
     },
-    PostReservation(data) {
-        return Api(secrets.URL_SPRING).post(`reservation/${data.mesa_id}`, data);
+    PostReservation(data, id) {
+        console.log(data)
+        return Api(secrets.URL_SPRING).post('reservation/' + id, data);
     },
     PutReservation(data) {
         return Api(secrets.URL_SPRING).put(`reservation/${data.mesa_id}`, data);

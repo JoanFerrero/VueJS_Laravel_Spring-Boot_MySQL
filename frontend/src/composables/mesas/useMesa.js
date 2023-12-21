@@ -28,7 +28,5 @@ export const useMesaInfinite = (page = 1, limit = 2) => {
     MesaService.GetMesasInfinite(page, limit)
         .then(res => mesas.value = res.data)
         .catch(error => console.error(error))
-        
-
     return mesas;
 };

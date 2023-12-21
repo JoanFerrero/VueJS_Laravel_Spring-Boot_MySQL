@@ -59,9 +59,16 @@
         </div>
     </div>
     <h1>Reservation</h1>
-    <ul class="list-group">
-        <li class="list-group-item" v-for="reservation in state.reservations">{{reservation.categoria}} {{reservation.accepted}} {{reservation.fecha_reserva}}</li>
-    </ul>
+    <ol class="list-group list-group-numbered">
+        <li class="list-group-item d-flex justify-content-between align-items-start" v-for="reservation in state.reservations">
+            <div class="ms-2 me-auto">
+            <div class="fw-bold">{{reservation.fecha_reserva}}</div>
+            {{reservation.categoria}}
+            </div>
+            <span class="badge bg-success rounded-pill" v-if="reservation.accepted === true">Aceptado</span>
+            <span class="badge bg-danger rounded-pill" v-if="reservation.accepted === false">Esperando confirmacion...</span>
+        </li>
+    </ol>
 </div>
 </template>
 
@@ -76,7 +83,7 @@ export default {
         profile: computed(() => store.getters['user/GetProfile']),
         reservations: useReservationList()
     });
-console.log(state)
+
     return {state}
   }
 }
