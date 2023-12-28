@@ -40,6 +40,11 @@
                         <i class="fs-4 bi-table"></i><span class="ms-1 d-none d-sm-inline">Create User</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/dashboard/reservation" class="nav-link align-middle px-0">
+                        <i class="fs-4 bi-house"></i><span class="ms-1 d-none d-sm-inline">List Reservation</span>
+                    </a>
+                </li>
             </ul>
             <hr>
             <div class="dropdown pb-4">

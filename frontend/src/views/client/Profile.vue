@@ -58,7 +58,7 @@
             </div>
         </div>
     </div>
-    <h1>Reservation</h1>
+    <h1>Reservas</h1>
     <ol class="list-group list-group-numbered">
         <li class="list-group-item d-flex justify-content-between align-items-start" v-for="reservation in state.reservations">
             <div class="ms-2 me-auto">

@@ -3,9 +3,9 @@
     <thead>
       <tr>
         <th scope="col">#ID</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Editar</th>
-        <th scope="col">Borrar</th>
+        <th scope="col">Name</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -13,10 +13,10 @@
         <th scope="row">{{category.id}}</th>
         <td>{{category.name_category}}</td>
         <td>
-          <button class="btn btn-primary" @click="updateCategory(category.id)">Editar</button>
+          <button class="btn btn-primary" @click="updateCategory(category.id)">Edit</button>
         </td>
         <td>
-          <button class="btn btn-danger" @click="deleteCategory(category.id)">Borrar</button>
+          <button class="btn btn-danger" @click="deleteCategory(category.id)">Delete</button>
         </td>
       </tr>
     </tbody>

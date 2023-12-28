@@ -29,8 +29,8 @@ export default (URL) => {
                 router.push({ name: "home" });
             }
             return Promise.reject(error);
-        }//end if
-    );//response interceptor remove token and user when unauthorized
+        }
+    );
 
     return api
 }

@@ -7,7 +7,7 @@
           <th scope="col">Email</th>
           <th scope="col">Type</th>
           <th scope="col">Is Active</th>
-          <th scope="col">Borrar</th>
+          <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -18,7 +18,7 @@
           <td>{{user.type}}</td>
           <td>{{user.is_active === 1 ? 'Activa' : 'No Activa' }}</td>
           <td>
-            <button class="btn btn-danger" @click="deleteUser(user.id)">Borrar</button>
+            <button class="btn btn-danger" @click="deleteUser(user.id)">Delete</button>
           </td>
         </tr>
       </tbody>

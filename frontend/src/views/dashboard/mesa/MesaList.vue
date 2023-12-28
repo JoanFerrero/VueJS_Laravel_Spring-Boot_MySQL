@@ -3,11 +3,11 @@
       <thead>
         <tr>
           <th scope="col">#ID</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Reservado</th>
-          <th scope="col">Capacidad</th>
-          <th scope="col">Editar</th>
-          <th scope="col">Borrar</th>
+          <th scope="col">Name</th>
+          <th scope="col">Reserved</th>
+          <th scope="col">Capacity</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -17,10 +17,10 @@
           <td>{{mesa.is_active === 1 ? 'Activa' : 'No Activa' }}</td>
           <td>{{mesa.capacity}}</td>
           <td>
-            <button class="btn btn-primary" @click="updateMesa(mesa.id)">Editar</button>
+            <button class="btn btn-primary" @click="updateMesa(mesa.id)">Edit</button>
           </td>
           <td>
-            <button class="btn btn-danger" @click="deleteMesa(mesa.id)">Borrar</button>
+            <button class="btn btn-danger" @click="deleteMesa(mesa.id)">Delete</button>
           </td>
         </tr>
       </tbody>

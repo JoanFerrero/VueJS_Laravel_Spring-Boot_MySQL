@@ -24,4 +24,10 @@ export default {
     LOGIN: "Login",
     LOGIN_ADMIN: "Login_admin",
     LOGOUT: "Logout",
+
+    //RESERVATION
+    INITIALIZE_RESERVATION: "InitializeReservation",
+    DELETE_ONE_RESERVATION:"DeteleOneReservation",
+    UPDATE_ONE_RESERVATION:"UpdateOneReservation",
+
 }

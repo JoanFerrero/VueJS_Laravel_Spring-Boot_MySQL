@@ -21,62 +21,68 @@ const routes = [
   },
   { 
     path: "/dashboard", 
-    name:"dashboard", 
+    name: "dashboard", 
     component: () => import('../views/dashboard/mesa/MesaList.vue'),
     beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
   },
   { 
     path: "/dashboard/mesa", 
-    name:"mesalist", 
+    name: "mesalist", 
     component: () => import('../views/dashboard/mesa/MesaList.vue'),
     beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
   },
   { 
     path: "/dashboard/mesa/create", 
-    name:"mesacreate", 
+    name: "mesacreate", 
     component: () => import('../views/dashboard/mesa/MesaCreate.vue'),
     beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
   },
   { 
     path: "/dashboard/mesa/update/:id", 
-    name:"mesaupdate", 
+    name: "mesaupdate", 
     component: () => import('../views/dashboard/mesa/MesaUpdate.vue'),
     beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
   },
   { 
     path: "/dashboard/category", 
-    name:"categorylist", 
+    name: "categorylist", 
     component: () => import('../views/dashboard/category/CategoryList.vue'),
     beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true } 
   },
   { 
     path: "/dashboard/category/create", 
-    name:"categorycreate", 
+    name: "categorycreate", 
     component: () => import('../views/dashboard/category/CategoryCreate.vue'),
     beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
   },
   { 
     path: "/dashboard/category/update/:id", 
-    name:"categoryupdate", 
+    name: "categoryupdate", 
     component: () => import('../views/dashboard/category/CategoryUpdate.vue'),
     beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
   },
   { 
     path: "/dashboard/user", 
-    name:"userlist", 
+    name: "userlist", 
     component: () => import('../views/dashboard/user/UserList.vue'),
     beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
   },
   { 
     path: "/dashboard/user/create", 
-    name:"usercreate", 
+    name: "usercreate", 
     component: () => import('../views/dashboard/user/UserCreate.vue'),
     beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
   },
   { 
     path: "/dashboard/user/update/:id", 
-    name:"userupdate", 
+    name: "userupdate", 
     component: () => import('../views/dashboard/user/UserUpdate.vue'),
+    beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
+  },
+  {
+    path: "/dashboard/reservation",
+    name: "reservationlist",
+    component: () => import('../views/dashboard/reservation/ReservationList.vue'),
     beforeEnter: AuthGuards.authGuardAdmin, meta: { requiresAuth: true }
   },
   {
