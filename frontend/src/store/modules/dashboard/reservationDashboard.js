@@ -44,7 +44,7 @@ export const reservationDashboard = {
             try {
                 const response = await ReservationServiceDashboard.PutReservation(payload);
                 if (response.status == 200) {
-                    store.commit(Constant.UPDATE_ONE_RESERVATION, payload);
+                    store.commit(Constant.UPDATE_ONE_RESERVATION, response.data[0]);
                 }
             } catch (error) {
                 console.error(error)

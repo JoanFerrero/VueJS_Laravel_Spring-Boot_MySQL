@@ -31,7 +31,7 @@ import { useVuelidate } from '@vuelidate/core';
 import { required, url, alphaNum, numeric, minValue } from '@vuelidate/validators';
 export default {
   props: {
-      category: Object
+    category: Object
   },
   emits: {
       data: Object

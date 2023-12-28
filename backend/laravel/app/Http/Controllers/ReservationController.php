@@ -54,17 +54,18 @@ class ReservationController extends Controller
      */
     public function update(UpdateReservationRequest $request, string $id)
     {
-        $data = $request->except(['user_id', 'mesa_id']);
         $reservation = Reservation::where('id', $id)->firstOrFail();
+        $data = ["accepted" => !$reservation->accepted];
         $update = Reservation::where('id', $id)->update($data);
         if($update == 1) {
+            $reservation = ReservationResource::make(Reservation::where('id', $id)->firstOrFail());
             return response()->json([
-                "Status" => "Update correct"
-            ], 201);
+                $reservation
+            ], 200);
         } else {
             return response()->json([
                 "Status" => "Update not correct"
-            ], 400);
+            ], 401);
         }
     }
 
@@ -77,11 +78,11 @@ class ReservationController extends Controller
         if($delete == 1) {
             return response()->json([
               "message" => "Reservation deleted"
-            ], 202);
+            ], 200);
         } else {
             return response()->json([
               "message" => "Reservation not found"
-            ], 404);
+            ], 401);
         }
     }
 }

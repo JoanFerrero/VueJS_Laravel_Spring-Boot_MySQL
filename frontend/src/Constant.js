@@ -27,7 +27,7 @@ export default {
 
     //RESERVATION
     INITIALIZE_RESERVATION: "InitializeReservation",
-    DELETE_ONE_RESERVATION:"DeteleOneReservation",
-    UPDATE_ONE_RESERVATION:"UpdateOneReservation",
+    DELETE_ONE_RESERVATION: "DeteleOneReservation",
+    UPDATE_ONE_RESERVATION: "UpdateOneReservation",
 
 }

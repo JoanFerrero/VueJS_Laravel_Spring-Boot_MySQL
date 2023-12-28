@@ -5,8 +5,8 @@ export default {
     GetReservations() {
         return Api(secrets.URL_LARAVEL).get('reservation');
     },
-    PutReservation(id, data) {
-        return Api(secrets.URL_LARAVEL).get('reservation/' + id, data);
+    PutReservation(id) {
+        return Api(secrets.URL_LARAVEL).put('reservation/' + id);
     },
     DeleteReservation(id) {
         return Api(secrets.URL_LARAVEL).delete('reservation/' + id);

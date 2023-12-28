@@ -18,11 +18,14 @@
           <td>{{reservation.hora}}</td>
           <td>{{reservation.user.username}}</td>
           <td>{{reservation.mesa.name_mesa}}</td>
-          <td>
-            <button class="btn btn-primary" @click="updateReservation(reservation.id)">Activar</button>
+          <td v-if="!reservation.accepted" >
+            <button class="btn btn-primary" @click="updateReservation(reservation.id, true)">Active</button>
+          </td>
+          <td v-if="reservation.accepted">
+            <button class="btn btn-primary" @click="updateReservation(reservation.id, false)">Desactivate</button>
           </td>
           <td>
-            <button class="btn btn-danger" @click="deleteReservation(reservation.id)">Borrar</button>
+            <button class="btn btn-danger" @click="deleteReservation(reservation.id)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -44,13 +47,18 @@ export default {
 
       store.dispatch(`reservationDashboard/${Constant.INITIALIZE_RESERVATION}`);
 
-      const updateReservation = (id) => {
-
+      const updateReservation = (id, valor) => {
+        const reservation = state.reservations.find(e => e.id === id);
+        if (reservation) {
+          store.dispatch(`reservationDashboard/${Constant.UPDATE_ONE_RESERVATION}`, reservation.id, valor);
+        } else {
+          toaster.info('You have to select at last ONE reservation');
+        }
       }
       const deleteReservation = (id) => {
         const reservation = state.reservations.find(e => e.id === id);
         if (reservation) {
-          //store.dispatch(`reservationDashboard/${Constant.DELETE_ONE_RESERVATION}`, reservation.id);
+          store.dispatch(`reservationDashboard/${Constant.DELETE_ONE_RESERVATION}`, reservation.id);
         } else {
           toaster.info('You have to select at last ONE reservation');
         }
@@ -59,7 +67,6 @@ export default {
       const state = reactive({
         reservations: computed(() => store.getters["reservationDashboard/getReservations"])
       })
-      console.log(state.reservations)
 
       return { state, updateReservation, deleteReservation }
     }
