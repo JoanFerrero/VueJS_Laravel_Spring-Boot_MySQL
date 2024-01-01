@@ -26,6 +26,7 @@ export default (URL) => {
             console.log(api.defaults.headers.common.Authorization)
             if (error.response.status === 401) {
                 toaster.error('Error');
+                store.dispatch(`user/${Constant.LOGOUT}`);
                 router.push({ name: "home" });
             }
             return Promise.reject(error);

@@ -1,20 +1,6 @@
 <template>
   <carrousel :data="state.categories" v-if="state.categories" @emitAction="redirectReservation"/>
-  <h5 class="card-title">Mesas</h5>
-  <div class="p-5">
-    <div class="row row-cols-2 g-2">
-      <div class="col" v-for="mesa in state.mesasInfinite">
-        <div class="card bg-dark text-white">
-        <img :src="mesa.photo" class="card-img" alt="Stony Beach"/>
-          <div class="card-img-overlay">
-            <h5 class="card-title">{{mesa.name_mesa}}</h5>
-            <h5 class="card-text">Capacidad: {{mesa.capacity}}</h5>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <InfiniteLoading @infinite="scroll" :distance="1" />
+  <ListMesas :data="state.mesasInfinite" @emitAction="addInfinite"/>
 </template>
 
 <script>
@@ -26,9 +12,10 @@ import { useRouter } from 'vue-router';
 import carrousel from '../../components/client/carrousel.vue';
 import { useMesaInfinite } from '../../composables/mesas/useMesa.js';
 import InfiniteLoading from "v3-infinite-loading";
+import ListMesas from '../../components/client/ListMesas.vue';
 
 export default {
-  components: { InfiniteLoading, carrousel, CardCategory },
+  components: { InfiniteLoading, carrousel, CardCategory, ListMesas },
   setup() {
     const store = useStore();
     const router = useRouter();
@@ -38,7 +25,7 @@ export default {
 
     const state = reactive({
       categories: computed(() => store.getters['category/GetCategories']),
-      mesasInfinite: useMesaInfinite(1, 2),
+      mesasInfinite: useMesaInfinite(1, 4),
     });
 
     const redirectReservation = (item) => {
@@ -55,18 +42,10 @@ export default {
     }
 
     const addInfinite = (page) => {
-      const mesas = useMesaInfinite(page, 2);
-      state.mesasInfinite = mesas;
+      state.mesasInfinite = useMesaInfinite(page, 4)
     }
 
-    const scroll = ($state) => {
-      page++;
-      if (page <= 4) {
-        addInfinite(page);
-      }
-    }
-
-    return { state, redirectReservation, addInfinite, scroll }
+    return { state, redirectReservation, addInfinite }
   }
 }
 </script>

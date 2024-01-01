@@ -16,22 +16,21 @@ import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import { getCurrentInstance } from 'vue';
 import carouselItem from './carrousel_item.vue';
 export default {
-    components: { carouselItem, Carousel, Slide, Pagination, Navigation },
-    props: {
-        data: Object
-    },
-    emits: {
-        emitAction: Object
-    },
-    setup(props) {
-        const { emit } = getCurrentInstance();
-        const emitAction = (item) => {
-            emit('emitAction', item);
-        }
-
-        return { emitAction }
-
+  components: { carouselItem, Carousel, Slide, Pagination, Navigation },
+  props: {
+    data: Object
+  },
+  emits: {
+    emitAction: Object
+  },
+  setup(props) {
+    const { emit } = getCurrentInstance();
+    const emitAction = (item) => {
+        emit('emitAction', item);
     }
+
+    return { emitAction }
+  }
 }
 </script>
 <style lang="scss">
