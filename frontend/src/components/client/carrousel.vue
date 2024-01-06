@@ -26,7 +26,7 @@ export default {
   setup(props) {
     const { emit } = getCurrentInstance();
     const emitAction = (item) => {
-        emit('emitAction', item);
+      emit('emitAction', item);
     }
 
     return { emitAction }

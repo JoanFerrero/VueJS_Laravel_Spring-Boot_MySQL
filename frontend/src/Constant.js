@@ -3,6 +3,7 @@ export default {
     INITIALIZE_MESA: "InitializeMesa",
     INITIALIZE_ONE_STATE_MESA: "InitializeOneStateMesa",
     INITIALIZE_MESA_RELATION: "InitializeMesaRelation",
+    INITIALIZA_MESA_RESERVATION: "InitializeMesaReservation",
     DELETE_ONE_MESA:"DeteleOneMesa",
     UPDATE_ONE_MESA:"UpdateOneMesa",
     CREATE_ONE_MESA:"CreateOneMesa",

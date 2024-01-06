@@ -17,14 +17,6 @@ export const useReservationList = () => {
     return reservations;
 };
 
-export const useReservationUpdate = (data = {}) => {
-    const reservationUpdate = ref([])
-    ReservationService.PutReservation(data)
-        .then(res => { reservationUpdate.value = res.data })
-        .catch(error => console.log(error))
-    return reservationUpdate;
-}
-
 export const useReservationDelete = (id) => {
     const reservationDelete = ref({})
     ReservationService.DeleteReservation(id)

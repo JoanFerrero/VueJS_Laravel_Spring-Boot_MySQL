@@ -12,14 +12,7 @@
         <ul>
           <li v-for="category in state.mesas.categories">{{category.name_category}}</li>
         </ul>
-        <div v-if="state.isLogged">
-          <h3 class="my-3">Realizar reserva</h3>
-          <select class="form-select" aria-label="Default select example" v-model="state.reserva.category">
-            <option v-for="category in state.mesas.categories">{{category.name_category}}</option>
-          </select>
-          <br>
-          <button type="button" class="btn btn-secondary btn-lg" @click="sendReserva()">Reservar</button>
-        </div>
+        <ReservationForm :mesa="state.mesas" :reservation="state.reservation"/>
       </div>
     </div>
     <h3 class="my-4">Mesas Relacionadas</h3>
@@ -42,8 +35,10 @@ import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import Constant from '../../Constant';
 import { reactive, computed } from 'vue';
+import ReservationForm from '../../components/client/ReservationForm.vue';
 import { useReservationCreate } from '../../composables/reservation/useReservation.js';
 export default {
+  components: { ReservationForm },
   setup(props) {
     const store = useStore();
     const route = useRoute();
@@ -53,15 +48,19 @@ export default {
 
     store.dispatch(`mesa/${Constant.INITIALIZE_ONE_STATE_MESA}`, id);
     store.dispatch(`mesa/${Constant.INITIALIZE_MESA_RELATION}`, id);
+    store.dispatch(`mesa/${Constant.INITIALIZA_MESA_RESERVATION}`, id);
 
     const state = reactive({
       mesas: computed(() => store.getters["mesa/getOneMesa"]),
       mesasRelation: computed(() => store.getters["mesa/getMesasRelation"]),
       isLogged: computed(() => store.getters['user/GetIsAuth']),
+      reservation: computed(() => store.getters['mesa/getMesaReservation']),
       reserva: {
         category: 'Selecciona una opcion valida',
       }
     });
+      console.log(state)
+      console.log(state.mesas)
     
     const showDetails = (id) => {
       router.push({ name: "reservationDetails", params: { id } });
@@ -70,20 +69,7 @@ export default {
       }, 100);
     };
 
-    const sendReserva = () => {
-      if(state.reserva.category != 'Selecciona una opcion valida'){
-        const hoy = new Date();
-        const data = {
-          categoria: state.reserva.category,
-          fecha_reserva: hoy.getDate() + '-' + hoy.getMonth() + '-' + hoy.getFullYear(),
-          accepted: false
-        }
-        useReservationCreate(data, state.mesas.id);
-        console.log(data)
-      }
-    }
-
-    return { state, showDetails, sendReserva }
+    return { state, showDetails }
   }
 }
 </script>

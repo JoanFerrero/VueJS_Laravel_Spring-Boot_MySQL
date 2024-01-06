@@ -18,13 +18,11 @@ use App\Http\Controllers\ReservationController;
 |
 */
 Route::group(['middleware' => ['admin']], function () {
-    //Route::resource('mesa', MesaController::class);
+    Route::resource('mesa', MesaController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('user', UserController::class);  
-    //Route::resource('reservation', ReservationController::class);
+    Route::resource('reservation', ReservationController::class);
 });
-Route::resource('mesa', MesaController::class);
-Route::resource('reservation', ReservationController::class);
 Route::post('login', [UserController::class, 'login']);
 Route::post('logout', [UserController::class, 'logout']);
 Route::get('profile', [UserController::class, 'getUserToken']);

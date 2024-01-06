@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.app.spring.datajpa.model.Category;
 import com.app.spring.datajpa.model.Reservation;
 import com.app.spring.datajpa.model.User;
 import com.app.spring.datajpa.model.Mesa;
+import com.app.spring.datajpa.repository.CategoryRepository;
 import com.app.spring.datajpa.repository.MesaRepository;
 import com.app.spring.datajpa.repository.ReservationRepository;
 import com.app.spring.datajpa.repository.UserRepository;
@@ -41,6 +42,8 @@ public class ReservationController {
     @Autowired
     private UserRepository UserRepository;
 
+    @Autowired
+	CategoryRepository categoryRepository;
 
     @GetMapping("/reservation")
     public ResponseEntity<?> profile() {
@@ -50,6 +53,18 @@ public class ReservationController {
                     .getPrincipal();
             reservationRepository.findAll(userDetails.getUsername()).forEach(reservations::add);
             return new ResponseEntity<>(reservations, HttpStatus.OK);
+        } catch (Exception e) {
+            System.err.println(e);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @GetMapping("/allreservation/{id}")
+    public ResponseEntity<List<Category>> AllReservation(@PathVariable(required = true) Integer id) {
+        try {
+            List<Category> categories = new ArrayList<Category>();
+			categoryRepository.findAllMesa(id).forEach(categories::add);
+            return new ResponseEntity<>(categories, HttpStatus.OK);
         } catch (Exception e) {
             System.err.println(e);
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -121,13 +136,20 @@ public class ReservationController {
     }
     
     @DeleteMapping("reservation/{id}")
-    public ResponseEntity<?> deleteReservation(@PathVariable String id) {
+    public ResponseEntity<?> deleteReservation(@PathVariable(required = true) Long id) {
         try {
-            List<Reservation> reservations = new ArrayList<Reservation>();
-            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
-                    .getPrincipal();
-            reservationRepository.findAll(userDetails.getUsername()).forEach(reservations::add);
-            return new ResponseEntity<>(reservations, HttpStatus.OK);
+            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            List<Reservation> reservations1 = new ArrayList<Reservation>();
+            List<Reservation> reservation = reservationRepository.findId(id, userDetails.getUsername());
+
+            //Validacion si la reserva es tuya y existe la reserva
+            if(reservation.size() == 0) {
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
+
+            reservationRepository.deleteById(id);
+            reservationRepository.findAll(userDetails.getUsername()).forEach(reservations1::add);
+            return new ResponseEntity<>(reservations1, HttpStatus.OK);
         } catch (Exception e) {
             System.err.println(e);
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

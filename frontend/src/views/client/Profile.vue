@@ -67,6 +67,7 @@
             </div>
             <span class="badge bg-success rounded-pill" v-if="reservation.accepted === true">Aceptado</span>
             <span class="badge bg-danger rounded-pill" v-if="reservation.accepted === false">Esperando confirmacion...</span>
+            <button class="p-2 py-2 px-2" v-if="!reservation.accepted" @click="cancellReservation(reservation.id)">Cancelar Reserva</button>
         </li>
     </ol>
 </div>
@@ -75,7 +76,7 @@
 <script>
 import { reactive, computed } from 'vue';
 import { useStore } from 'vuex';
-import { useReservationList } from '../../composables/reservation/useReservation.js';
+import { useReservationList, useReservationDelete } from '../../composables/reservation/useReservation.js';
 export default {
   setup(props) {
     const store = useStore();
@@ -84,7 +85,11 @@ export default {
         reservations: useReservationList()
     });
 
-    return {state}
+    const cancellReservation = (id) => {
+        state.reservations = useReservationDelete(id);
+    }
+
+    return {state, cancellReservation}
   }
 }
 </script>

@@ -29,6 +29,10 @@ export default {
     },
     GetMesasRelation(id) {
         return Api(secrets.URL_SPRING).get('/mesa/relation/' + id);
+    },
+    GetMesasReservation(id) {
+        console.log(id)
+        return Api(secrets.URL_SPRING).get('/allreservation/' + id);
     }
 
 }//export

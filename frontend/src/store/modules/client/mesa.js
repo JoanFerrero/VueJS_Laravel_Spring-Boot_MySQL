@@ -14,6 +14,11 @@ export const mesa = {
                 state.OneMesa = payload;
             }
         },
+        [Constant.INITIALIZA_MESA_RESERVATION]: (state, payload) => {
+            if (payload) {
+                state.mesaReservation = payload;
+            }
+        },
         [Constant.INITIALIZE_MESA_RELATION]: (state, payload) => {
             if (payload) {
                 state.mesasRelation = payload;
@@ -44,6 +49,14 @@ export const mesa = {
                 console.error(error)
             }
         },
+        [Constant.INITIALIZA_MESA_RESERVATION]: async (store, payload) => {
+            try {
+                const response = await MesaService.GetMesasReservation(payload);
+                store.commit(Constant.INITIALIZA_MESA_RESERVATION, response.data);
+            } catch (error) {
+                console.error(error)
+            }
+        },
         [Constant.INITIALIZE_MESA_RELATION]: async (store, payload) => {
             try {
                 const response = await MesaService.GetMesasRelation(payload);
@@ -59,6 +72,9 @@ export const mesa = {
         },
         getOneMesa(state) {
             return state.OneMesa;
+        },
+        getMesaReservation(state) {
+            return state.mesaReservation;
         },
         getMesasRelation(state) {
             return state.mesasRelation;
