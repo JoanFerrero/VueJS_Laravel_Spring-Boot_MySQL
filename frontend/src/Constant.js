@@ -17,6 +17,7 @@ export default {
 
     ///USER
     INITIALIZE_PROFILE: "InitializeProfile",
+    UPDATE_PROFILE: "UpdateProfile",
     INITIALIZE_USER: "InitializeUser",
     INITIALIZE_ONE_USER: "InitializeOneUser",
     ADD_USER: "AddUser",
@@ -25,10 +26,10 @@ export default {
     LOGIN: "Login",
     LOGIN_ADMIN: "Login_admin",
     LOGOUT: "Logout",
+    UPDATE: "Update",
 
     //RESERVATION
     INITIALIZE_RESERVATION: "InitializeReservation",
     DELETE_ONE_RESERVATION: "DeteleOneReservation",
     UPDATE_ONE_RESERVATION: "UpdateOneReservation",
-
 }

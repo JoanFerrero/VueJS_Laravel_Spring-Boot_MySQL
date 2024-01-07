@@ -14,6 +14,9 @@ export default {
     Profile() {
         return Api(secrets.URL_SPRING).get('profile');
     },
+    //UpdateProfile() {
+    //    return Api(secrets.URL_SPRING).put('')
+    //},
     Login_Admin(data){
         return Api(secrets.URL_LARAVEL).post('login', data);
     },

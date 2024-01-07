@@ -16,7 +16,12 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="card mb-3">
+                <!--<div v-if="state.edit === true">
+                    <FormEditProfile :profile="state.profile" @data="update_emit"/>
+                    <br />
+                    <button class="p-2 py-2 px-2" @click="editProfile()">Cancelar</button>
+                </div>-->
+                <div class="card mb-3" v-if="state.edit === false">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-3">
@@ -53,6 +58,15 @@
                                 ********
                             </div>
                         </div>
+                        <hr>
+                        <!--<div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Editar Perfil</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <button class="p-2 py-2 px-2" @click="editProfile()">Editar Perfil</button>
+                            </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -77,17 +91,34 @@
 import { reactive, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useReservationList, useReservationDelete } from '../../composables/reservation/useReservation.js';
+import FormEditProfile from '../../components/client/FormEditProfile.vue';
+import { useRoute, useRouter } from 'vue-router'
 export default {
+  components: {FormEditProfile},
   setup(props) {
+    const router = useRouter();
     const store = useStore();
     const state = reactive({
         profile: computed(() => store.getters['user/GetProfile']),
-        reservations: useReservationList()
+        reservations: useReservationList(),
+        edit: false,
     });
 
     const cancellReservation = (id) => {
         state.reservations = useReservationDelete(id);
     }
+
+    //const editProfile = () => {
+    //    state.edit = !state.edit;
+    //}
+
+    //const update_emit = (user) => {
+      //store.dispatch(`userDashboard/${Constant.UPDATE_USER}`, user);
+      //toaster.success("User updated")
+      //state.profile.username = user.username;
+      //state.profile.email = user.email;
+      //state.edit = !state.edit;
+    //};
 
     return {state, cancellReservation}
   }

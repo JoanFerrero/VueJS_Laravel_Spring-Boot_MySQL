@@ -48,7 +48,11 @@ export const user = {
                 localStorage.setItem("isAdmin", payload.type === 'admin');
             }
         },//INITIALIZE_PROFILE
-
+        //[Constant.UPDATE_PROFILE]: (state, payload) => {
+        //    if (payload) {
+        //        state.user = payload;
+        //    }
+        //},
         [Constant.LOGOUT]: (state, payload) => {
             state.user = {};
             state.isAuth = false;
@@ -118,6 +122,16 @@ export const user = {
                 console.error(error);
             }
         },//INITIALIZE_PROFILE
+        //[Constant.UPDATE_PROFILE]: async (store) => {
+        //    try {
+        //        const response = await UserService.UpdateProfile();
+        //        if (response.status === 200) {
+        //            store.commit(Constant.UPDATE_PROFILE, response.data);
+        //        }
+        //    } catch (error) {
+        //        console.error(error);
+        //    }
+        //}
     },//actions
     getters: {
         GetProfile: (state) => {
