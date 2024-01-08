@@ -35,7 +35,6 @@ _Proyecto con referencia a la aplicacion - Web Walapop_
 ---
 
 ### `Requisitos`
-Es necesario crear el fichero .env en la carpeta backend. El contenido puede ser el mismo que el de env_example.txt
 
 Tener instalado las siguientes herramientas:
 
@@ -47,17 +46,27 @@ Tener instalado las siguientes herramientas:
 ### `Puesta en marcha`
 
 #### Backend
+   **Laravel**
   ```
-  cd backend
-  npm install
-  npm run dev
+   cd backend/laravel
+   chmod 777 -R .
+   php artisan key:generate
+   php artisan jwt:secret
+   php artisan storage:link
+   php artisan migrate:fresh --seed
   ```
-
+**Spring Boot**
+  ```
+   cd backend/springboot
+   chmod 777 -R .
+   mvnw install
+   mvnw spring-boot:run
+  ```
   #### Frontend
   ```
   cd frontend
   npm install
-  npm run start
+  npm run dev
   ```
 
 ## Tecnologías 👨‍💻
@@ -79,7 +88,7 @@ Lista de tecnologías utilizadas en este proyecto:
   - Middleware_auth
     - Header
     - Token JWT
-  - Seeders y factorys: users y products
+  - Seeders y factorys: categorias, usuarios y mesas.
 
 - [Spring-boot](https://spring.io/projects/spring-boot/) v3.1.5
   - Routes
