@@ -8,27 +8,28 @@ Por [`Joan Ferrero Montiel`](https://github.com/JoanFerrero)
 2. Instalar
 3. Tecnologias
 
-
 # Restaurante_Joan! 
-_Proyecto con referencia a la aplicacion - Web Walapop_
 
 1. **Home:**
-   Carousel e infiniteScroll de las categorias más populares
+   Carousel de categorías e infiniteScroll de las mesas.
 
 2. **Shop:**
-   Listados de productos, filtros, paginación, añadir a favorito, propetario de cada producto con redireccion a su perfil.
+   Listados de mesas, filtros, paginación y redirección al details de cada mesa.
 
 3. **Details:**
-   Ver detalles junto a un Carousel del propio producto, añadir a favoritos y comentar el producto.
-   Además permite visitar el perfil del propietario de producto.
+   Ver detalles de la mesa con tres mesas relacionadas debajo y realizar reserva de la mesa
+   dependiendo del horario.
 
 4. **Profile:**
-   Ver el perfil de cualquier usuario, seguirlo, ver sus productos y seguidores - seguidos. 
-   Si eres ese usuario podras crear productos nuevos desde el perfil y editar los datos de usuario.
-   
+   Ver el perfil de tu perfil, accediendo a un listado donde podrás ver tus reservas y  cancelar la reserva
+   si no está activada.
 
 5. **Login:**
    Register y Login de usuario.
+
+6. **Dashboard:**
+   Solo tienen acceso los administradores, contiene los cruds: categorías, mesas y usuarios.
+   Las reservas solo pueden realizar un Update para activar y eliminar la reserva.
 
 ## Instalar 💿
 
