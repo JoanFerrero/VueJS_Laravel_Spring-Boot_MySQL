@@ -78,7 +78,7 @@ Lista de tecnologías utilizadas en este proyecto:
 
 `Backend` 🏗️
 
-- [Laravel](https://laravel.com/docs/10.x/releases) v10
+- Laravel v10
   - Routes
   - Models
   - Controllers
@@ -91,7 +91,7 @@ Lista de tecnologías utilizadas en este proyecto:
     - Token JWT
   - Seeders y factorys: categorias, usuarios y mesas.
 
-- [Spring-boot](https://spring.io/projects/spring-boot/) v3.1.5
+- Spring-boot v3.1.5
   - Routes
   - Models
   - Controllers
@@ -106,7 +106,7 @@ Lista de tecnologías utilizadas en este proyecto:
 
 `Frontend` 🏛️
 
-- [Vue](https://vuejs.org/) v3
+- Vue v3
   - JavaSpript
   - Estructurado en Modules
   - Routes
