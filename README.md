@@ -47,7 +47,7 @@ Tener instalado las siguientes herramientas:
 ### `Puesta en marcha`
 
 #### Backend
-   **Laravel**
+  - **Laravel**
   ```
    cd backend/laravel
    chmod 777 -R .
@@ -56,7 +56,7 @@ Tener instalado las siguientes herramientas:
    php artisan storage:link
    php artisan migrate:fresh --seed
   ```
-**Spring Boot**
+   - **Spring Boot**
   ```
    cd backend/springboot
    chmod 777 -R .
